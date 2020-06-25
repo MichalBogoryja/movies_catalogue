@@ -20,7 +20,6 @@ def homepage():
     if selected_list not in available_lists:
         return redirect("/?list_type=popular")
     movies = tmdb_client.get_movies(how_many=8, list_type=selected_list)
-
     return render_template("homepage.html", movies=movies,
                            current_list=selected_list,
                            available_lists=available_lists)
@@ -29,7 +28,6 @@ def homepage():
 @app.route("/movie/<movie_id>")
 def movie_details(movie_id):
     details = tmdb_client.get_single_movie(movie_id)
-    print(details["backdrop_path"])
     cast = tmdb_client.get_single_movie_cast(movie_id)[:12]
     movie_images = tmdb_client.get_movie_images(movie_id)
     selected_backdrop = random.choice(movie_images['backdrops'])['file_path']

@@ -42,8 +42,14 @@ def get_movie_images(movie_id):
 
 def get_movies(how_many, list_type):
     data = get_movies_list(list_type)
-    random.shuffle(data["results"])
-    return data["results"][:how_many]
+    # print(data)
+    if list_type == "latest":
+        movies = []
+        movies.append(data)
+        return movies
+    else:
+        random.shuffle(data["results"])
+        return data["results"][:how_many]
 
 
 def get_single_movie(movie_id):
